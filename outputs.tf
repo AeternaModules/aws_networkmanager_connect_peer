@@ -8,7 +8,7 @@ output "networkmanager_connect_peers_arn" {
 }
 output "networkmanager_connect_peers_bgp_options" {
   description = "Map of bgp_options values across all networkmanager_connect_peers, keyed the same as var.networkmanager_connect_peers"
-  value       = { for k, v in aws_networkmanager_connect_peer.networkmanager_connect_peers : k => v.bgp_options if v.bgp_options != null && length(v.bgp_options) > 0 }
+  value       = { for k, v in aws_networkmanager_connect_peer.networkmanager_connect_peers : k => one(v.bgp_options) if v.bgp_options != null && length(v.bgp_options) > 0 }
 }
 output "networkmanager_connect_peers_configuration" {
   description = "Map of configuration values across all networkmanager_connect_peers, keyed the same as var.networkmanager_connect_peers"
